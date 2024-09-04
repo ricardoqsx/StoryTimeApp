@@ -1,0 +1,38 @@
+services:
+  webapp:
+    container_name: pywapp
+    build: .
+    image: backend:1.0
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    ports:
+      - 8000:8000
+    volumes:
+      - ./webApp:/webApp
+    restart: unless-stopped
+    networks:
+      - pynet
+
+  pydb:
+    container_name: pydb
+    image: mariadb:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    env_file: .env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - pynet
+    restart: unless-stopped
+
+networks:
+  pynet:
+    name: pynet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.11.0.0/24
