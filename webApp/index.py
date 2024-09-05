@@ -10,7 +10,7 @@ app=Flask(__name__)
 # y luego con una funcion se le da valor
 def home():
     # aqui retorna lo que uno le diga (en este caso un texto simple)
-#>    return 'Home Page'
+    #> return 'Home Page'
     return render_template('home.html')
 
 @app.route('/about')

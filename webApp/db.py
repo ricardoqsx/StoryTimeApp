@@ -1,25 +1,26 @@
 # app/db.py
 
-import mysql.connector
+import mariadb
 
-conexion = mysql.connector.connect(
+# datos de conexion a la base de datos
+conexion = mariadb.connect(
     host="pydb",
     user="pyuser",
     password="pypass",
     database="b4ck3nd"
 )
 
+# se crea el cursor para hacer consultas a la bd
 cursor = conexion.cursor()
-
+queries=conexion.cursor()
 
 # Crear tabla si no existe
-def crear_tabla():
-    query = """
-    CREATE TABLE IF NOT EXISTS personas (
+queries.execute(
+    """CREATE TABLE IF NOT EXISTS personas (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        edad INT NOT NULL
-    )
-    """
-    cursor.execute(query)
-    conexion.commit()
+        edad INT NOT NULL)"""
+)
+
+# cierra la conexion con la base de datos
+conexion.close()
