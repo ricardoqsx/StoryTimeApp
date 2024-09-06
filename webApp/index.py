@@ -1,6 +1,6 @@
 # llama el framework flask desde el paquete flask
 from flask import Flask, render_template, request, redirect, url_for
-from config import config
+import db
 
 # encapsula  flask en una variable
 app=Flask(__name__)
@@ -15,7 +15,8 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    # data=db.lectura_data()
+    return render_template('actividades.html')
 
 @app.route('/phishh')
 def phishh():
