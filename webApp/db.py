@@ -10,28 +10,26 @@ conexion = mariadb.connect(
 )
 # se crea el cursor para hacer consultas a la bd
 cursor = conexion.cursor()
-queries=conexion.cursor()
 
 # Crean las 2 tablas principales para la base de datos, 
 # una de usuario y otra para los cuentos
 
 def crear_bd():
-    queries.execute(
+    cursor.execute(
         """CREATE TABLE IF NOT EXISTS cuentos (
             id INT AUTO_INCREMENT PRIMARY KEY,
             titulo VARCHAR(100) NOT NULL,
             categoria VARCHAR(100) NOT NULL,
             descripcion VARCHAR(100) NOT NULL)"""
     )
-    queries.execute(
+    cursor.execute(
         """CREATE TABLE IF NOT EXISTS usuarios (
             user_id INT AUTO_INCREMENT PRIMARY KEY,
             user VARCHAR(25) NOT NULL,
             password VARCHAR(100) NOT NULL,
             full_name VARCHAR(50) NOT NULL)"""
     )
-
-    queries.execute(
+    cursor.execute(
         """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
         ('Introducción a Docker', 'Contenedores', 'Conceptos básicos sobre Docker y el uso de contenedores.'),
         ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre administración de bases de datos MariaDB.'),
@@ -49,15 +47,22 @@ def crear_bd():
         ('Despliegue de Aplicaciones con Docker Compose', 'Contenedores', 'Despliega aplicaciones multicontenedor con Docker Compose.'),
         ('Análisis de Datos con Python', 'Análisis de Datos', 'Usa Python para analizar grandes volúmenes de datos.')"""
             )
-
-def lectura_data():
-    queries.execute(
-        "select * from cuentos"
-    )
+    # Confirmar los cambios realizados
+    conexion.commit()
+    print("Datos insertados correctamente.")
     
 
-# ejecutando las consultas
-crear_bd()
-# cierra la conexion con la base de datos
-conexion.close()
+# Función para leer los datos de la tabla 'cuentos'
+def lectura_data():
+    cursor.execute("SELECT * FROM cuentos")
+    cuentos = cursor.fetchall()  # Recupera todos los resultados
+    return cuentos  # Devuelve los resultados
+    
+    #for cuento in cursor.fetchall():
+    #    print(cuento)
 
+# Ejecutar las consultas
+crear_bd()
+lectura_data()
+
+# Cerrar la conexión con la base de datos

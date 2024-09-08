@@ -10,7 +10,7 @@
 
   <div class="bg-dark py-4 px-4 text-bg-dark mt-5" style="text-align:center">
   <h1 >Resultados de la Consulta</h1>
-    <table border="1" class="table">
+    <table border="1" class="table table-striped table-dark">
         <thead>
             <tr>
                 <th>ID</th>
@@ -21,12 +21,12 @@
             </tr>
         </thead>
         <tbody>
-            {% for fila in datos %}
+            {% for cuentos in cuentos %}
                 <tr>
-                    <td>{{ fila[0] }}</td>
-                    <td>{{ fila[1] }}</td>
-                    <td>{{ fila[2] }}</td>
-                    <td>{{ fila[3] }}</td>
+                    <td scope="row">{{ cuentos[0] }}</td>
+                    <td scope="row">{{ cuentos[1] }}</td>
+                    <td scope="row">{{ cuentos[2] }}</td>
+                    <td scope="row">{{ cuentos[3] }}</td>
                     <!-- Añade más columnas según tu tabla -->
                 </tr>
             {% endfor %}

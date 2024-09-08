@@ -13,10 +13,10 @@ def home():
     #> return 'Home Page'
     return render_template('home.html')
 
-@app.route('/about')
-def about():
-    # data=db.lectura_data()
-    return render_template('actividades.html')
+@app.route('/actividades')
+def actividades():
+    cuentos=db.lectura_data()
+    return render_template('actividades.html',cuentos=cuentos)
 
 @app.route('/phishh')
 def phishh():
