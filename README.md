@@ -17,16 +17,17 @@ Describiendo la logica de la aplicacion storytime (nombre provisional)
 
 	- Flutter
 	- Dart
-	- Flask
 	- HTML5
 	- CSS3
 	- SQLite
+	- BootStrap
 
 ### del lado del Backend
 
 	- MariaDB
 	- Docker
 	- Python
+	- Flask
 	- Linux
 
 ===============================
