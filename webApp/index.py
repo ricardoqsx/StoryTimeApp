@@ -13,14 +13,26 @@ def home():
     #> return 'Home Page'
     return render_template('home.html')
 
-@app.route('/actividades')
-def actividades():
-    cuentos=db.lectura_data()
-    return render_template('actividades.html',cuentos=cuentos)
+@app.route('/operaciones')
+def operaciones():
+    cuentos=db.consulta()
+    return render_template('operaciones.html',cuentos=cuentos)
 
-@app.route('/phishh')
-def phishh():
-    return render_template('phishh.html')
+@app.route('/insertar')
+def insertar():
+    return render_template('insertar.html')
+
+@app.route('/actualizar')
+def actualizar():
+    return render_template('actualizar.html')
+
+@app.route('/borrar')
+def borrar():
+    return render_template('borrar.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='8000')

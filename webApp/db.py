@@ -31,20 +31,13 @@ def crear_bd():
     )
     cursor.execute(
         """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
-        ('Introducción a Docker', 'Contenedores', 'Conceptos básicos sobre Docker y el uso de contenedores.'),
-        ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre administración de bases de datos MariaDB.'),
-        ('Curso de Virtualización con VMware', 'Virtualización', 'Domina VMware para la virtualización de servidores y entornos.'),
-        ('Fundamentos de Redes en Linux', 'Redes', 'Conceptos básicos de redes y su configuración en Linux.'),
-        ('Guía de Iniciación a Kubernetes', 'Orquestación de Contenedores', 'Tutorial para principiantes sobre Kubernetes.'),
-        ('Seguridad en Servidores Web', 'Seguridad', 'Prácticas esenciales para asegurar servidores web contra amenazas.'),
-        ('Creación de Aplicaciones Web con Flask', 'Desarrollo Web', 'Desarrolla aplicaciones web usando Flask, un microframework.'),
-        ('Implementación de Apache Guacamole', 'Acceso Remoto', 'Guía para implementar Apache Guacamole en contenedores Docker.'),
-        ('Optimización de Sistemas Operativos', 'Sistemas Operativos', 'Técnicas para optimizar sistemas operativos Linux y Windows.'),
-        ('Gestión de Proyectos con Git y GitHub', 'Control de Versiones', 'Uso de Git y GitHub para la gestión de proyectos.'),
-        ('Desarrollo de Aplicaciones Móviles con Flutter', 'Desarrollo Móvil', 'Crea apps móviles multiplataforma con Flutter y Dart.'),
-        ('Administración de Redes con WireGuard', 'Redes', 'Configura y administra conexiones VPN seguras con WireGuard.'),
-        ('Certificación en Nagios', 'Monitorización', 'Información clave para la certificación en Nagios.'),
-        ('Despliegue de Aplicaciones con Docker Compose', 'Contenedores', 'Despliega aplicaciones multicontenedor con Docker Compose.'),
+        ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre bases de datos MariaDB.'),
+        ('Guía de Iniciación a Kubernetes', 'Orquestación de Contenedores', 'Tutorial sobre Kubernetes.'),
+        ('Creación de Aplicaciones Web con Flask', 'Desarrollo Web', 'Desarrolla aplicaciones web usando Flask.'),
+        ('Gestión de Proyectos con Git', 'Control de Versiones', 'Uso de Git para proyectos.'),
+        ('Desarrollo de Aplicaciones con Flutter', 'Desarrollo Móvil', 'Crea apps móviles con Flutter y Dart.'),
+        ('Administración de Redes con WireGuard', 'Redes', 'Configura conexiones VPN seguras con WireGuard.'),
+        ('Despliegue de Aplicaciones con Docker', 'Contenedores', 'Despliega aplicaciones con Docker.'),
         ('Análisis de Datos con Python', 'Análisis de Datos', 'Usa Python para analizar grandes volúmenes de datos.')"""
             )
     # Confirmar los cambios realizados
@@ -53,16 +46,28 @@ def crear_bd():
     
 
 # Función para leer los datos de la tabla 'cuentos'
-def lectura_data():
+def consulta():
     cursor.execute("SELECT * FROM cuentos")
     cuentos = cursor.fetchall()  # Recupera todos los resultados
     return cuentos  # Devuelve los resultados
-    
-    #for cuento in cursor.fetchall():
-    #    print(cuento)
+
+def insertar(titulo, categoria, descripcion):
+    query = "INSERT INTO personas (titulo, categoria) VALUES (%s, %s)"
+    cursor.execute(query, (titulo, categoria))
+    conn.commit()
+
+def actualizar(id, titulo, categoria, descripcion):
+    query = "UPDATE personas SET titulo = %s, categoria = %s, descripcion = %s WHERE id = %s"
+    cursor.execute(query, (titulo, categoria, descripcion, ida))
+    conn.commit()
+
+def borrar(id):
+    query = "DELETE FROM personas WHERE id = %s"
+    cursor.execute(query, (id_persona,))
+    conn.commit()
 
 # Ejecutar las consultas
 crear_bd()
-lectura_data()
+consulta()
 
 # Cerrar la conexión con la base de datos
