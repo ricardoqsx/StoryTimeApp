@@ -1,10 +1,28 @@
 {%extends "layout.html"%}
 
 {%block content%}
-<div class="bg-light py-2 px-2 btn-group-lg mt-5" role="group" style="text-align:center" aria-label="Basic mixed styles example">
-    <h2 class="bg-light py-4 px-4" style="text-align: center">Operaciones en la base de datos</h2>
+<div class="bg-dark py-2 px-2 btn-group-lg mt-5 box rounded-2" data-bs-theme="dark" role="group" style="text-align:center" aria-label="Basic mixed styles example">
+    <h2 class="py-4 px-4 text-light bg-dark" style="text-align: center">Operaciones en la base de datos</h2>
     <a type="button" class="btn btn-success py-4 px-4 col-2" href="{{url_for('insertar')}}">Crear</a>
     <a type="button" class="btn btn-warning py-4 px-4 col-2" href="{{url_for('actualizar')}}">Actualizar</a>
     <a type="button" class="btn btn-danger py-4 px-4 col-2" href="{{url_for('borrar')}}">Eliminar</a>
+  
+
+  <h3 class="mt-5 text-warning" >Insertando datos en la base de datos...</h3>
+  <p class="text-warning">Por favor llene los siguientes datos a continuacion</p>
+  <form action="/insertar" method="post"></form>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Titulo" aria-label="First name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Categoria" aria-label="Last name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Descripcion" aria-label="Last name">
+    </div>
   </div>
+  <button class="btn btn-outline-secondary mt-3" type="submit">Insertar</button>
+  </form>
+</div>
 {%endblock%}

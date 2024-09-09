@@ -14,6 +14,8 @@ services:
     restart: unless-stopped
     networks:
       - pynet
+    depends_on:
+      - pydb
 
   pydb:
     container_name: pydb
