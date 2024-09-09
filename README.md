@@ -8,7 +8,7 @@ Describiendo la logica de la aplicacion storytime (nombre provisional)
 * deben ser historias muy ricas culturalmente hablando. (eso luego se inventa con chatGPT)
 
 
-instrucciones del despliegue:
+## instrucciones del despliegue:
 - copiar repositorio
 - copiar archivo .env.example a .env
 - tener instalado docker y docker compose
