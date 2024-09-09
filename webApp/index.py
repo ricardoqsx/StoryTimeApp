@@ -13,22 +13,22 @@ def home():
     #> return 'Home Page'
     return render_template('home.html')
 
-@app.route('/operaciones')
+@app.route('/op/operaciones')
 def operaciones():
     cuentos=db.consulta()
-    return render_template('operaciones.html',cuentos=cuentos)
+    return render_template('op/operaciones.html',cuentos=cuentos)
 
-@app.route('/insertar')
+@app.route('/op/insertar')
 def insertar():
-    return render_template('insertar.html')
+    return render_template('op/insertar.html')
 
-@app.route('/actualizar')
+@app.route('/op/actualizar')
 def actualizar():
-    return render_template('actualizar.html')
+    return render_template('op/actualizar.html')
 
-@app.route('/borrar')
+@app.route('/op/borrar')
 def borrar():
-    return render_template('borrar.html')
+    return render_template('op/borrar.html')
 
 @app.route('/about')
 def about():
