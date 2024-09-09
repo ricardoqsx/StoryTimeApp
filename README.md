@@ -9,9 +9,10 @@ Describiendo la logica de la aplicacion storytime (nombre provisional)
 
 
 ## instrucciones del despliegue:
-- copiar repositorio
+- clonar repositorio
 - copiar archivo .env.example a .env
 - tener instalado docker y docker compose
+- si se trabaja con WSL, en el terminal ejecutar ´code .´ estando en el directorio raiz del repositorio
 
 ===============================
 ===============================
