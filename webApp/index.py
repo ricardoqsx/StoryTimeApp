@@ -13,20 +13,20 @@ def home():
     #> return 'Home Page'
     return render_template('home.html')
 
-@app.route('/op/operaciones')
-def operaciones():
-    cuentos=db.consulta()
-    return render_template('op/operaciones.html',cuentos=cuentos)
+@app.route('/operaciones')                                          # las rutas inician con /
+def operaciones():                                                  # se define la funcion
+    cuentos=db.consulta()                                           # aqui se especifica la funcion a ejecutar dentro de esa ruta
+    return render_template('op/operaciones.html',cuentos=cuentos)   # aqui en el render template se especifica la ruta
 
-@app.route('/op/insertar')
+@app.route('/insertar')
 def insertar():
     return render_template('op/insertar.html')
 
-@app.route('/op/actualizar')
+@app.route('/actualizar')
 def actualizar():
     return render_template('op/actualizar.html')
 
-@app.route('/op/borrar')
+@app.route('/borrar')
 def borrar():
     return render_template('op/borrar.html')
 
