@@ -26,9 +26,21 @@ def insertar():
 def actualizar():
     return render_template('op/actualizar.html')
 
-@app.route('/borrar')
+@app.route('/borrar', methods=['GET', 'POST'])
 def borrar():
-    return render_template('op/borrar.html')
+    if request.method == 'POST':
+        # Obtén los IDs de los cuentos seleccionados
+        cuentos_ids = request.form.getlist('cuentos_ids')
+        
+        # Llama a la función para eliminar cuentos
+        db.borrar(cuentos_ids)
+        
+        # Redirecciona a la misma página después de la eliminación
+        return redirect(url_for('borrar'))
+    
+    # Si el método es GET, simplemente obtén y muestra los cuentos
+    cuentos=db.consulta()
+    return render_template('op/borrar.html',cuentos=cuentos)
 
 @app.route('/about')
 def about():

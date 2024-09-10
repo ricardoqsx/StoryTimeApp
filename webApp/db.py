@@ -54,17 +54,18 @@ def consulta():
 def insertar(titulo, categoria, descripcion):
     query = "INSERT INTO personas (titulo, categoria) VALUES (%s, %s)"
     cursor.execute(query, (titulo, categoria))
-    conn.commit()
+    conexion.commit()
 
 def actualizar(id, titulo, categoria, descripcion):
     query = "UPDATE personas SET titulo = %s, categoria = %s, descripcion = %s WHERE id = %s"
     cursor.execute(query, (titulo, categoria, descripcion, ida))
-    conn.commit()
+    conexion.commit()
 
-def borrar(id):
-    query = "DELETE FROM personas WHERE id = %s"
-    cursor.execute(query, (id_persona,))
-    conn.commit()
+def borrar(cuentos_ids):
+    # Eliminar los cuentos seleccionados
+    for cuento_id in cuentos_ids:
+        cursor.execute("DELETE FROM cuentos WHERE id = %s", (cuento_id,))    
+    conexion.commit()
 
 # Ejecutar las consultas
 crear_bd()

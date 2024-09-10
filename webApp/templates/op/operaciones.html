@@ -8,7 +8,7 @@
     <a type="button" class="btn btn-danger py-4 px-4 col-2" href="{{url_for('borrar')}}">Eliminar</a>
   
   
-    <div class="bg-dark py-4 px-4 text-bg-dark" style="text-align:left">
+    <div class="bg-dark py-4 px-4 text-bg-dark">
       <h1>Resultados de la Consulta</h1>
         <table border="1" class="table table-striped table-dark">
             <thead>
@@ -20,7 +20,7 @@
                     <!-- Añade más columnas según tu tabla -->
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="text-align:left">
                 {% for cuentos in cuentos %}
                     <tr>
                         
