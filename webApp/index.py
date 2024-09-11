@@ -5,6 +5,7 @@ import secrets
 # encapsula  flask en una variable
 app=Flask(__name__)
 
+# Generar una clave secreta de 16 bytes en formato hexadecimal
 secret_key = secrets.token_hex(16)
 
 app.secret_key = secret_key
