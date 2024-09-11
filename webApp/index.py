@@ -1,9 +1,10 @@
 # llama el framework flask desde el paquete flask
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 import db
 
 # encapsula  flask en una variable
 app=Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 # se define la ruta, la cual inicia por /
 @app.route('/')
@@ -18,8 +19,28 @@ def operaciones():                                                  # se define 
     cuentos=db.consulta()                                           # aqui se especifica la funcion a ejecutar dentro de esa ruta
     return render_template('op/operaciones.html',cuentos=cuentos)   # aqui en el render template se especifica la ruta
 
-@app.route('/insertar')
+@app.route('/insertar', methods=['GET', 'POST'])
 def insertar():
+    if request.method == 'POST':
+        # Validar entradas
+        titulo = request.form.get('titulo', '').strip()
+        categoria = request.form.get('categoria', '').strip()
+        descripcion = request.form.get('descripcion', '').strip()
+
+        if not titulo or not categoria or not descripcion:
+            flash('Todos los campos son obligatorios', 'error')
+            return redirect(url_for('insertar'))
+        
+        # Intentar insertar en la base de datos
+        try:
+            db.insertar(titulo, categoria, descripcion)
+            flash('Datos insertados con éxito', 'success')
+        except Exception as e:
+            flash(f'Error al insertar datos: {str(e)}', 'error')
+
+        return redirect(url_for('insertar'))
+
+    # Renderizar el formulario de inserción
     return render_template('op/insertar.html')
 
 @app.route('/actualizar')

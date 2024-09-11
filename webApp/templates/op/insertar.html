@@ -10,16 +10,16 @@
 
   <h3 class="mt-5 text-success" >Insertando datos en la base de datos...</h3>
   <p class="text-success">Por favor llene los siguientes datos a continuacion</p>
-  <form action="/insertar" method="post"></form>
+  <form action="{{ url_for('insertar') }}"" method="POST">
   <div class="row">
     <div class="col">
-      <input type="text" class="form-control" placeholder="Titulo" aria-label="First name">
+      <input type="text" class="form-control" name="titulo" placeholder="Titulo">
     </div>
     <div class="col">
-      <input type="text" class="form-control" placeholder="Categoria" aria-label="Last name">
+      <input type="text" class="form-control" name="Categoria" placeholder="Categoria">
     </div>
     <div class="col">
-      <input type="text" class="form-control" placeholder="Descripcion" aria-label="Last name">
+      <input type="text" class="form-control" name="Descripcion" placeholder="Descripcion">
     </div>
   </div>
   <button class="btn btn-success mt-3" type="submit">Crear Cuento</button>

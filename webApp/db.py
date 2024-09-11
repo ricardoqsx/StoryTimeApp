@@ -52,13 +52,13 @@ def consulta():
     return cuentos  # Devuelve los resultados
 
 def insertar(titulo, categoria, descripcion):
-    query = "INSERT INTO personas (titulo, categoria) VALUES (%s, %s)"
-    cursor.execute(query, (titulo, categoria))
+    query = "INSERT INTO personas (titulo, categoria, descripcion) VALUES (%s, %s, %s)"
+    cursor.execute(query, (titulo, categoria, descripcion))
     conexion.commit()
 
 def actualizar(id, titulo, categoria, descripcion):
     query = "UPDATE personas SET titulo = %s, categoria = %s, descripcion = %s WHERE id = %s"
-    cursor.execute(query, (titulo, categoria, descripcion, ida))
+    cursor.execute(query, (titulo, categoria, descripcion))
     conexion.commit()
 
 def borrar(cuentos_ids):
