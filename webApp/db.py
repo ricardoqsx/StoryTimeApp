@@ -29,17 +29,19 @@ def crear_bd():
             password VARCHAR(100) NOT NULL,
             full_name VARCHAR(50) NOT NULL)"""
     )
-    cursor.execute(
-        """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
-        ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre bases de datos MariaDB.'),
-        ('Guía de Iniciación a Kubernetes', 'Orquestación de Contenedores', 'Tutorial sobre Kubernetes.'),
-        ('Creación de Aplicaciones Web con Flask', 'Desarrollo Web', 'Desarrolla aplicaciones web usando Flask.'),
-        ('Gestión de Proyectos con Git', 'Control de Versiones', 'Uso de Git para proyectos.'),
-        ('Desarrollo de Aplicaciones con Flutter', 'Desarrollo Móvil', 'Crea apps móviles con Flutter y Dart.'),
-        ('Administración de Redes con WireGuard', 'Redes', 'Configura conexiones VPN seguras con WireGuard.'),
-        ('Despliegue de Aplicaciones con Docker', 'Contenedores', 'Despliega aplicaciones con Docker.'),
-        ('Análisis de Datos con Python', 'Análisis de Datos', 'Usa Python para analizar grandes volúmenes de datos.')"""
-            )
+    cursor.execute("SELECT COUNT(*) FROM cuentos")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute(
+            """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
+            ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre bases de datos MariaDB.'),
+            ('Guía de Iniciación a Kubernetes', 'Orquestación de Contenedores', 'Tutorial sobre Kubernetes.'),
+            ('Creación de Aplicaciones Web con Flask', 'Desarrollo Web', 'Desarrolla aplicaciones web usando Flask.'),
+            ('Gestión de Proyectos con Git', 'Control de Versiones', 'Uso de Git para proyectos.'),
+            ('Desarrollo de Aplicaciones con Flutter', 'Desarrollo Móvil', 'Crea apps móviles con Flutter y Dart.'),
+            ('Administración de Redes con WireGuard', 'Redes', 'Configura conexiones VPN seguras con WireGuard.'),
+            ('Despliegue de Aplicaciones con Docker', 'Contenedores', 'Despliega aplicaciones con Docker.'),
+            ('Análisis de Datos con Python', 'Análisis de Datos', 'Usa Python para analizar grandes volúmenes de datos.')"""
+                )
     # Confirmar los cambios realizados
     conexion.commit()
     print("Datos insertados correctamente.")

@@ -8,18 +8,18 @@
     <a type="button" class="btn btn-danger py-4 px-4 col-2" href="{{url_for('borrar')}}">Eliminar</a>
   
 
-  <h3 class="mt-5 text-success" >Insertando datos en la base de datos...</h3>
+  <h3 class="mt-5 text-success">Insertando datos en la base de datos...</h3>
   <p class="text-success">Por favor llene los siguientes datos a continuacion</p>
-  <form action="{{ url_for('insertar') }}"" method="POST">
+  <form action="{{ url_for('insertar') }}" method="POST">
   <div class="row">
     <div class="col">
-      <input type="text" class="form-control" name="titulo" placeholder="Titulo">
+      <input type="text" class="form-control" name="titulo" value="{{ titulo if titulo else '' }}" placeholder="Titulo"> <!-- Esto asegura que, si la variable titulo está definida (por ejemplo, después de un error de validación o en un formulario de edición), su valor será mostrado. Si no está definida, el campo estará vacío -->
     </div>
     <div class="col">
-      <input type="text" class="form-control" name="Categoria" placeholder="Categoria">
+      <input type="text" class="form-control" name="categoria" value="{{ categoria if categoria else '' }}" placeholder="Categoria">
     </div>
     <div class="col">
-      <input type="text" class="form-control" name="Descripcion" placeholder="Descripcion">
+      <input type="text" class="form-control" name="descripcion" value="{{ descripcion if descripcion else '' }}" placeholder="Descripcion">
     </div>
   </div>
   <button class="btn btn-success mt-3" type="submit">Crear Cuento</button>

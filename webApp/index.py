@@ -1,14 +1,10 @@
 # llama el framework flask desde el paquete flask
-from flask import Flask, flash, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 import db
-import secrets
+
 # encapsula  flask en una variable
 app=Flask(__name__)
 
-# Generar una clave secreta de 16 bytes en formato hexadecimal
-secret_key = secrets.token_hex(16)
-
-app.secret_key = secret_key
 
 # se define la ruta, la cual inicia por /
 @app.route('/')
@@ -27,23 +23,11 @@ def operaciones():                                                  # se define 
 def insertar():
     if request.method == 'POST':
         # Validar entradas
-        titulo = request.form.get('titulo', '').strip()
-        categoria = request.form.get('categoria', '').strip()
-        descripcion = request.form.get('descripcion', '').strip()
-
-        if not titulo or not categoria or not descripcion:
-            flash('Todos los campos son obligatorios', 'error')
-            return redirect(url_for('insertar'))
-        
-        # Intentar insertar en la base de datos
-        try:
-            db.insertar(titulo, categoria, descripcion)
-            flash('Datos insertados con éxito', 'success')
-        except Exception as e:
-            flash(f'Error al insertar datos: {str(e)}', 'error')
-
+        titulo = request.form.get(titulo)
+        categoria = request.form.get('categoria')
+        descripcion = request.form.get('descripcion')
+        db.insertar(titulo, categoria, 'descripcion')
         return redirect(url_for('insertar'))
-
     # Renderizar el formulario de inserción
     return render_template('op/insertar.html')
 
