@@ -1,10 +1,13 @@
 # llama el framework flask desde el paquete flask
 from flask import Flask, flash, render_template, request, redirect, url_for
 import db
-
+import secrets
 # encapsula  flask en una variable
 app=Flask(__name__)
-app.secret_key = 'your_secret_key'
+
+secret_key = secrets.token_hex(16)
+
+app.secret_key = secret_key
 
 # se define la ruta, la cual inicia por /
 @app.route('/')
