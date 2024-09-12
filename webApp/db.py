@@ -30,6 +30,7 @@ def crear_bd():
             full_name VARCHAR(50) NOT NULL)"""
     )
     cursor.execute("SELECT COUNT(*) FROM cuentos")
+    # este if basicamente verifica si la tabla no esta vacia, si lo esta entonces inserta los valores
     if cursor.fetchone()[0] == 0:
         cursor.execute(
             """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
@@ -59,9 +60,22 @@ def insertar(titulo, categoria, descripcion):
     conexion.commit()
 
 def actualizar(id, titulo, categoria, descripcion):
-    query = "UPDATE cuentos SET titulo = %s, categoria = %s, descripcion = %s WHERE id = %s"
-    cursor.execute(query, (titulo, categoria, descripcion))
-    conexion.commit()
+    for i in range(len(id)):
+        id = ids[i]
+        titulo = titulo[i]
+        categoria = categoria[i]
+        descripcion = descripcion[i]
+                
+        # Construir el query de actualización
+        query = """
+        UPDATE cuentos
+            SET 
+                titulo = IF(titulo != %s, %s, titulo),
+                categoria = IF(categoria != %s, %s, categoria),
+                descripcion = IF(descripcion != %s, %s, descripcion)
+            WHERE id = %s;
+                """
+        cursor.execute(query, (titulo, titulo, categoria, categoria, descripcion, descripcion, id))
 
 def borrar(cuentos_ids):
     # Eliminar los cuentos seleccionados
