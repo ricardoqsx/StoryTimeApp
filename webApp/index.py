@@ -23,10 +23,10 @@ def operaciones():                                                  # se define 
 def insertar():
     if request.method == 'POST':
         # Validar entradas
-        titulo = request.form.get(titulo)
+        titulo = request.form.get('titulo')
         categoria = request.form.get('categoria')
         descripcion = request.form.get('descripcion')
-        db.insertar(titulo, categoria, 'descripcion')
+        db.insertar(titulo, categoria, descripcion)
         return redirect(url_for('insertar'))
     # Renderizar el formulario de inserción
     return render_template('op/insertar.html')
