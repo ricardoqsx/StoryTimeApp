@@ -60,13 +60,12 @@ def insertar(titulo, categoria, descripcion):
     cursor.execute(query, (titulo, categoria, descripcion))
     conexion.commit()
 
-def actualizar(id, titulo, categoria, descripcion):
-    for i in range(len(id)):
-        id = ids[i]
+def actualizar(cuento_id, titulo, categoria, descripcion):
+    for i in range(len(cuento_id)):
+        cuento_id = cuento_id[i]
         titulo = titulo[i]
         categoria = categoria[i]
-        descripcion = descripcion[i]
-                
+        descripcion = descripcion[i]   
         # Construir el query de actualización
         query = """
         UPDATE cuentos
@@ -76,7 +75,9 @@ def actualizar(id, titulo, categoria, descripcion):
                 descripcion = IF(descripcion != %s, %s, descripcion)
             WHERE id = %s;
                 """
-        cursor.execute(query, (titulo, titulo, categoria, categoria, descripcion, descripcion, id))
+        cursor.execute(query, (titulo, titulo, categoria, categoria, descripcion, descripcion, cuento_id))
+        conexion.commit()
+        
 
 def borrar(cuentos_ids):
     # Eliminar los cuentos seleccionados

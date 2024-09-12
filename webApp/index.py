@@ -33,7 +33,15 @@ def insertar():
 
 @app.route('/actualizar')
 def actualizar():
-    return render_template('op/actualizar.html')
+    if request.method == 'POST':
+        cuentos_ids = request.form.getlist('cuentos_ids')
+        titulos = request.form.getlist('titulo')
+        contenidos = request.form.getlist('categoria')
+        autores = request.form.getlist('descripcion')
+        db.actualizar()
+        return redirect(url_for('actualizar'))  # Redirigir después de actualizar
+    cuentos=db.consulta()
+    return render_template('op/actualizar.html',cuentos=cuentos)
 
 @app.route('/borrar', methods=['GET', 'POST'])
 def borrar():
