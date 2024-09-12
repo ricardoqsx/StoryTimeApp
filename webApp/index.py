@@ -1,6 +1,6 @@
 # llama el framework flask desde el paquete flask
 from flask import Flask, render_template, request, redirect, url_for
-import db
+import db # <- en db.py esta toda la logica de operaciones relacionadas a la base de datos
 
 # encapsula  flask en una variable
 app=Flask(__name__)
@@ -10,25 +10,25 @@ app=Flask(__name__)
 @app.route('/')
 # y luego con una funcion se le da valor
 def home():
-    # aqui retorna lo que uno le diga (en este caso un texto simple)
+    # aqui retorna lo que uno le diga (puede ser un texto simple o una pagina web)
     #> return 'Home Page'
     return render_template('home.html')
 
 @app.route('/operaciones')                                          # las rutas inician con /
 def operaciones():                                                  # se define la funcion
-    cuentos=db.consulta()                                           # aqui se especifica la funcion a ejecutar dentro de esa ruta
-    return render_template('op/operaciones.html',cuentos=cuentos)   # aqui en el render template se especifica la ruta
+    cuentos=db.consulta()                                           # aqui se especifica la funcion a ejecutar dentro de esa ruta, por defecto no esta definido pero todas las funciones tienen un metodo GET
+    return render_template('op/operaciones.html',cuentos=cuentos)   # aqui en el render template se especifica la ruta, adicionalmente se especifica la variable donde esta encapsulada la consulta a la BD
 
-@app.route('/insertar', methods=['GET', 'POST'])
+@app.route('/insertar', methods=['GET', 'POST'])                    # en este caso se especifican los 2 metodos ya que segun el caso (la logica) seran usados
 def insertar():
-    if request.method == 'POST':
+    if request.method == 'POST':                                    # en un if se declara que si la http request es POST
         # Validar entradas
-        titulo = request.form.get('titulo')
+        titulo = request.form.get('titulo')                         # toma todos los valores listados a continuacion a partir del formulario de insertar.html y los guarda en una variable c/u
         categoria = request.form.get('categoria')
         descripcion = request.form.get('descripcion')
-        db.insertar(titulo, categoria, descripcion)
-        return redirect(url_for('insertar'))
-    # Renderizar el formulario de inserción
+        db.insertar(titulo, categoria, descripcion)                 # aqui toma los valores y ejecuta la funcion insertar para guardar los valores en la BD
+        return redirect(url_for('insertar'))                        # y finalmente retorna la URL declarada en la funcion insertar, como luego de ejecutar el if el metodo sera GET, devuelve insertar.html
+    # Renderizar el formulario de inserción                         # adicionalmente, esto funciona como endpoint y por ende como una API la cual recoge los datos y los trabaja en el backend
     return render_template('op/insertar.html')
 
 @app.route('/actualizar')

@@ -32,6 +32,7 @@ def crear_bd():
     cursor.execute("SELECT COUNT(*) FROM cuentos")
     # este if basicamente verifica si la tabla no esta vacia, si lo esta entonces inserta los valores
     if cursor.fetchone()[0] == 0:
+        # valores de prueba para la base de datos
         cursor.execute(
             """INSERT INTO cuentos (titulo, categoria, descripcion) VALUES
             ('Administración de Bases de Datos con MariaDB', 'Bases de Datos', 'Guía sobre bases de datos MariaDB.'),
