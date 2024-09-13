@@ -60,24 +60,41 @@ def insertar(titulo, categoria, descripcion):
     cursor.execute(query, (titulo, categoria, descripcion))
     conexion.commit()
 
-def actualizar(cuento_id, titulo, categoria, descripcion):
-    for i in range(len(cuento_id)):
-        cuento_id = cuento_id[i]
-        titulo = titulo[i]
-        categoria = categoria[i]
-        descripcion = descripcion[i]   
-        # Construir el query de actualización
+#def actualizar(titulos, categorias, descripciones, cuentos_ids):
+#    for i in range(len(cuentos_ids)):
+#        cuento_id = cuentos_ids[i]
+#        titulo = titulos[i]
+#        categoria = categorias[i]
+#        descripcion = descripciones[i]   
+#        # Construir el query de actualización
+#        query = """
+#        UPDATE cuentos
+#            SET 
+#                titulo = IF(titulo != %s, %s, titulo),
+#                categoria = IF(categoria != %s, %s, categoria),
+#                descripcion = IF(descripcion != %s, %s, descripcion)
+#            WHERE id = %s;
+#                """
+#        cursor.execute(query, (titulo, titulo, categoria, categoria, descripcion, descripcion, cuento_id))
+#        conexion.commit()
+
+def actualizar(titulos, categorias, descripciones, ids_cuentos):
+    for i, cuento_id in enumerate(ids_cuentos):
+        nuevo_titulo = titulos[i]
+        nueva_categoria = categorias[i]
+        nueva_descripcion = descripciones[i]
+        
+        # Construir y ejecutar el query de actualización
         query = """
         UPDATE cuentos
-            SET 
-                titulo = IF(titulo != %s, %s, titulo),
-                categoria = IF(categoria != %s, %s, categoria),
-                descripcion = IF(descripcion != %s, %s, descripcion)
-            WHERE id = %s;
-                """
-        cursor.execute(query, (titulo, titulo, categoria, categoria, descripcion, descripcion, cuento_id))
-        conexion.commit()
-        
+        SET 
+            titulo = %s,
+            categoria = %s,
+            descripcion = %s
+        WHERE id = %s;
+        """
+        cursor.execute(query, (nuevo_titulo, nueva_categoria, nueva_descripcion, cuento_id))
+        conexion.commit()       
 
 def borrar(cuentos_ids):
     # Eliminar los cuentos seleccionados

@@ -31,14 +31,14 @@ def insertar():
     # Renderizar el formulario de inserción                         # adicionalmente, esto funciona como endpoint y por ende como una API la cual recoge los datos y los trabaja en el backend
     return render_template('op/insertar.html')
 
-@app.route('/actualizar')
+@app.route('/actualizar', methods=['GET', 'POST'])
 def actualizar():
     if request.method == 'POST':
-        cuentos_ids = request.form.getlist('cuentos_ids')
-        titulos = request.form.getlist('titulo')
-        contenidos = request.form.getlist('categoria')
-        autores = request.form.getlist('descripcion')
-        db.actualizar()
+        new_ids = request.form.getlist('cuentos_ids')
+        newtitle = request.form.getlist('titulo')
+        newcat = request.form.getlist('categoria')
+        newdesc = request.form.getlist('descripcion')
+        db.actualizar(newtitle, newcat, newdesc, new_ids)
         return redirect(url_for('actualizar'))  # Redirigir después de actualizar
     cuentos=db.consulta()
     return render_template('op/actualizar.html',cuentos=cuentos)
