@@ -34,14 +34,29 @@ def insertar():
 @app.route('/actualizar', methods=['GET', 'POST'])
 def actualizar():
     if request.method == 'POST':
-        new_ids = request.form.getlist('cuentos_ids')
-        newtitle = request.form.getlist('titulo')
-        newcat = request.form.getlist('categoria')
-        newdesc = request.form.getlist('descripcion')
-        db.actualizar(newtitle, newcat, newdesc, new_ids)
-        return redirect(url_for('actualizar'))  # Redirigir después de actualizar
+        # Obtener los IDs seleccionados
+        selected_ids = request.form.getlist('cuentos_ids')
+
+        # Preparar listas para los datos a actualizar
+        titles = []
+        categories = []
+        descriptions = []
+
+        # Recolectar datos para los IDs seleccionados
+        for cuento_id in selected_ids:
+            title = request.form.getlist('titulo')
+            category = request.form.getlist('categoria')
+            description = request.form.getlist('descripcion')
+            db.actualizar(selected_ids, titles, categories, descriptions)
+            return redirect(url_for('actualizar'))  # Redirigir después de actualizar
     cuentos=db.consulta()
     return render_template('op/actualizar.html',cuentos=cuentos)
+
+# el problema estoy casi seguro que tiene que ver con que no se esta iterando sobre
+# los valores que trae el formulario, o no se estan guardando correctamente, 
+# lo que lleva a que siempre se este actualizando el valor de la primera columna
+# efectivo, realice una prueba en la primera columna y se actualizo
+
 
 @app.route('/borrar', methods=['GET', 'POST'])
 def borrar():

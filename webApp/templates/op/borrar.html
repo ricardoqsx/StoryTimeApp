@@ -17,7 +17,6 @@
                 <th>ID</th>
                 <th>Titulo</th>
                 <th>Categoria</th>
-                <th>Cuento</th>
                 <th>Descripcion</th>
                 <!-- Añade más columnas según tu tabla -->
             </tr>
@@ -26,7 +25,6 @@
             {% for cuentos in cuentos %}
                 <tr>
                     <td><input class="form-check-input" type="checkbox" name="cuentos_ids" value="{{ cuentos[0] }}"></td> <!-- Checkbox -->
-                    <td scope="row">{{ cuentos[0] }}</td>
                     <td scope="row">{{ cuentos[1] }}</td>
                     <td scope="row">{{ cuentos[2] }}</td>
                     <td scope="row">{{ cuentos[3] }}</td>
