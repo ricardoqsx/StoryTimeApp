@@ -33,6 +33,10 @@ def insertar():
 
 @app.route('/actualizar', methods=['GET', 'POST'])
 def actualizar():
+    # cambiare el enfoque:
+    # creare un menu desplegable a partir del cual muestre todos los titulos
+    # y en el formulario que envie, precargue una celda, para que el usuario 
+    # actualice la fila
     if request.method == 'POST':
         # Obtener los IDs seleccionados
         selected_ids = request.form.getlist('cuentos_ids')
@@ -52,10 +56,10 @@ def actualizar():
     cuentos=db.consulta()
     return render_template('op/actualizar.html',cuentos=cuentos)
 
-# el problema estoy casi seguro que tiene que ver con que no se esta iterando sobre
-# los valores que trae el formulario, o no se estan guardando correctamente, 
-# lo que lleva a que siempre se este actualizando el valor de la primera columna
-# efectivo, realice una prueba en la primera columna y se actualizo
+    # el problema estoy casi seguro que tiene que ver con que no se esta iterando sobre
+    # los valores que trae el formulario, o no se estan guardando correctamente, 
+    # lo que lleva a que siempre se este actualizando el valor de la primera columna
+    # efectivo, realice una prueba en la primera columna y se actualizo
 
 
 @app.route('/borrar', methods=['GET', 'POST'])
@@ -74,7 +78,7 @@ def borrar():
     cuentos=db.consulta()
     return render_template('op/borrar.html',cuentos=cuentos)
 
-@app.route('/about')
+@app.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('about.html')
 

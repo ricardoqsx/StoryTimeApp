@@ -79,6 +79,10 @@ def borrar(cuentos_ids):
         cursor.execute("DELETE FROM cuentos WHERE id = %s", (cuento_id,))    
     conexion.commit()
 
+def get_id(cuento_id):
+    cursor.execute("select titulo from cuentos where id = %s",(cuento_id))
+    cursor.commit()
+
 # Ejecutar las consultas
 crear_bd()
 consulta()
