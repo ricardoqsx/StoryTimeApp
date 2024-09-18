@@ -8,4 +8,22 @@
     <a type="button" class="btn btn-warning py-4 px-4 col-2" href="{{url_for('actualizar')}}">Actualizar</a>
     <a type="button" class="btn btn-danger py-4 px-4 col-2" href="{{url_for('borrar')}}">Eliminar</a>
 
+    <h3 class="mt-5 text-warning" >Actualizando datos...</h3>
+    <p class="text-warning">Por favor llene los siguientes datos a continuacion</p>
+    
+    <div class="bg-dark py-4 px-4 text-bg-dark" style="text-align:center">
+        <form method="POST" action="{{ url_for( 'about') }}">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Seleccione Cuento
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" name="cuentos_ids" value="{{ cuentos[0] }}">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                </ul>
+              </div>
+            <button type="submit" class="btn btn-warning">Seleccionar Cuentos</button> <!-- Botón de envío -->
+        </form>
+      </div>
+
 {%endblock%}
