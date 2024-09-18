@@ -33,34 +33,7 @@ def insertar():
 
 @app.route('/actualizar', methods=['GET', 'POST'])
 def actualizar():
-    # cambiare el enfoque:
-    # creare un menu desplegable a partir del cual muestre todos los titulos
-    # y en el formulario que envie, precargue una celda, para que el usuario 
-    # actualice la fila
-    if request.method == 'POST':
-        # Obtener los IDs seleccionados
-        selected_ids = request.form.getlist('cuentos_ids')
-
-        # Preparar listas para los datos a actualizar
-        titles = []
-        categories = []
-        descriptions = []
-
-        # Recolectar datos para los IDs seleccionados
-        for cuento_id in selected_ids:
-            title = request.form.getlist('titulo')
-            category = request.form.getlist('categoria')
-            description = request.form.getlist('descripcion')
-            db.actualizar(selected_ids, titles, categories, descriptions)
-            return redirect(url_for('actualizar'))  # Redirigir después de actualizar
-    cuentos=db.consulta()
     return render_template('op/actualizar.html',cuentos=cuentos)
-
-    # el problema estoy casi seguro que tiene que ver con que no se esta iterando sobre
-    # los valores que trae el formulario, o no se estan guardando correctamente, 
-    # lo que lleva a que siempre se este actualizando el valor de la primera columna
-    # efectivo, realice una prueba en la primera columna y se actualizo
-
 
 @app.route('/borrar', methods=['GET', 'POST'])
 def borrar():
@@ -81,6 +54,36 @@ def borrar():
 @app.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('about.html')
+
+#@app.route('/actualizar', methods=['GET', 'POST'])
+#def actualizar():
+    # cambiare el enfoque:
+    # creare un menu desplegable a partir del cual muestre todos los titulos
+    # y en el formulario que envie, precargue una celda, para que el usuario 
+    # actualice la fila
+#    if request.method == 'POST':
+        # Obtener los IDs seleccionados
+#        selected_ids = request.form.getlist('cuentos_ids')
+
+        # Preparar listas para los datos a actualizar
+#        titles = []
+#        categories = []
+#        descriptions = []
+
+        # Recolectar datos para los IDs seleccionados
+#        for cuento_id in selected_ids:
+#            title = request.form.getlist('titulo')
+#            category = request.form.getlist('categoria')
+#            description = request.form.getlist('descripcion')
+#            db.actualizar(selected_ids, titles, categories, descriptions)
+#            return redirect(url_for('actualizar'))  # Redirigir después de actualizar
+#    cuentos=db.consulta()
+#    return render_template('op/actualizar.html',cuentos=cuentos)
+
+    # el problema estoy casi seguro que tiene que ver con que no se esta iterando sobre
+    # los valores que trae el formulario, o no se estan guardando correctamente, 
+    # lo que lleva a que siempre se este actualizando el valor de la primera columna
+    # efectivo, realice una prueba en la primera columna y se actualizo
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='8000')

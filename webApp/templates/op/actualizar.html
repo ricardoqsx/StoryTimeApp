@@ -14,12 +14,13 @@
     <div class="bg-dark py-4 px-4 text-bg-dark" style="text-align:center">
         <form method="POST" action="{{ url_for( 'about') }}">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-2 mb-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Seleccione Cuento
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" name="cuentos_ids" value="{{ cuentos[0] }}">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  {% for cuento in cuentos %}
+                  <option class="dropdown-item" name="cuentos_ids" value="{{ cuento[0] }}">{{ cuento[1] }}</option>
+                  {% endfor %}
                 </ul>
               </div>
             <button type="submit" class="btn btn-warning">Seleccionar Cuentos</button> <!-- Botón de envío -->
