@@ -14,8 +14,12 @@ def home():
     #> return 'Home Page'
     return render_template('home.html')
 
+@app.route('/login')
+def auth():
+    return render_template('auth/auth.html')
+
 @app.route('/operaciones')                                          # las rutas inician con /
-def operaciones():                                                  # se define la funcion
+def operaciones():                                                # se define la funcion
     cuentos=db.consulta()                                           # aqui se especifica la funcion a ejecutar dentro de esa ruta, por defecto no esta definido pero todas las funciones tienen un metodo GET
     return render_template('op/operaciones.html',cuentos=cuentos)   # aqui en el render template se especifica la ruta, adicionalmente se especifica la variable donde esta encapsulada la consulta a la BD
 
