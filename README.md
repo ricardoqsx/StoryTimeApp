@@ -89,3 +89,4 @@ El app contaria con varias pantallas:
 	4. una pantalla de creditos, about/acerca de
 
 si todo esto se logra, estamos en el exito!!!
+Gracias 
