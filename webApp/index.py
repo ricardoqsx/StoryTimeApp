@@ -59,6 +59,10 @@ def borrar():
 def about():
     return render_template('about.html')
 
+@app.route('/testing', methods=['GET', 'POST'])
+def testing():
+    return render_template('testing.html')
+
 #@app.route('/actualizar', methods=['GET', 'POST'])
 #def actualizar():
     # cambiare el enfoque:
